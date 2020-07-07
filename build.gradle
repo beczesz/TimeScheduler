@@ -19,6 +19,26 @@ allprojects {
     }
 }
 
+/**
+ * Versioning has the following rules:
+ *
+ * Version style is XXYYZZZZ where
+ * XX is the major version: it should be incremented when the app introduces a new concept, full rewrite etc...
+ * YY is the minor version: it should be incremented when new features are added to the current version
+ * ZZZZ is the patch version: it should be incremented when fixes, minor modifications are done on the current version
+ */
+
+project.ext.versionMajor = 1
+project.ext.versionMinor = 0
+project.ext.versionPatch = 0
+
+project.ext.versionName = String.format("%d.%d.%d", project.ext.versionMajor, project.ext.versionMinor, project.ext.versionPatch)
+project.ext.versionNum = Integer.parseInt(String.format("%02d%02d%04d", project.ext.versionMajor, project.ext.versionMinor, project.ext.versionPatch))
+project.ext.versionDate = new Date()
+
+project.ext.appName = 'TimeScheuler'
+project.ext.appId = 'com.exarlabs.timescheduler'
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

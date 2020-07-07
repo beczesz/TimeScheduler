@@ -1,0 +1,137 @@
+// ------------------------------------------------------------------------
+// PROPERTIES -> TYPES
+// ------------------------------------------------------------------------
+
+project.ext.STRING = "String"
+project.ext.BOOLEAN = "boolean"
+project.ext.INT = "int"
+
+// ------------------------------------------------------------------------
+// UTILITY METHODS
+// ------------------------------------------------------------------------
+
+/**
+ * Wraps the String with ""
+ */
+def wrapQuotes = { String value ->
+    return "\"" + value + "\""
+}
+
+/**
+ * Pretty prints the key / value pairs of the given map prefixing with the prefix
+ * @param prefix the prefix
+ * @param map the map with key/value pairs
+ */
+def printMap = { String prefix, Map<String, ?> map ->
+    for (String key : map.keySet()) {
+        println("    " + prefix + ": " + key + " --> " + map.get(key))
+    }
+}
+
+def printProperties = { ->
+    printMap("P", project.properties)
+}
+
+def printEnvVariables = { ->
+    printMap("E", System.getenv())
+}
+
+// ------------------------------------------------------------------------
+// BUILD NUMBER
+// ------------------------------------------------------------------------
+// To define the build number use in the build.gradle
+// This property can be used from console as parameter
+// as gradlew build -PbuildNumber=999
+def BUILD_NUMBER_PROPERTY = "buildNumber"
+
+
+def getBuildNumber = { ->
+    return project.hasProperty(BUILD_NUMBER_PROPERTY) ? buildNumber : "-1"
+}
+
+def hasBuildNumber = { ->
+    return project.hasProperty(BUILD_NUMBER_PROPERTY)
+}
+
+def getBuildTime = { ->
+    return wrapQuotes(new Date().format('yyyy.MM.dd hh:mm:ss'))
+}
+
+// ------------------------------------------------------------------------
+// EXPOSED EXTRAS
+// ------------------------------------------------------------------------
+project.ext.getBuildNumber = getBuildNumber()
+project.ext.hasBuildNumber = hasBuildNumber()
+project.ext.BUILD_NUMBER = "BUILD_NUMBER"
+project.ext.HAS_BUILD_NUMBER = "HAS_BUILD_NUMBER"
+project.ext.BUILD_TIME = "BUILD_TIME"
+project.ext.USERNAME = "USERNAME"
+project.ext.COMPUTERNAME = "COMPUTERNAME"
+project.ext.PRODUCTION = "PRODUCTION"
+
+project.ext.buildNumberWithQuotes = wrapQuotes(getBuildNumber())
+project.ext.buildNumber = getBuildNumber()
+project.ext.buildTime = getBuildTime()
+
+// ------------------------------------------------------------------------
+// UTILITY METHODS
+// ------------------------------------------------------------------------
+/**
+ * Generates the apk name:
+ * 1. with build number
+ * [variant]_[build_number]_[app_name]_[version].apk
+ * 2. without build number
+ * [variant]_[app_name]_[version]_[user]@[machine].apk
+ */
+def getAPKFileName = { variant ->
+
+    StringBuilder sb = new StringBuilder()
+    String variantName = variant.name
+    sb.append(variantName)
+    sb.append("_")
+
+    if (project.hasBuildNumber) {
+        // we have a build number
+        sb.append("" + project.buildNumber)
+        sb.append("_")
+        sb.append(rootProject.appName)
+        sb.append("_")
+        sb.append(rootProject.versionName)
+    } else {
+        // we don't have a build number
+        sb.append(rootProject.appName)
+        sb.append("_")
+        sb.append(rootProject.versionName)
+        sb.append("_")
+        sb.append(System.getenv('USERNAME'))
+        sb.append("@")
+        sb.append(System.getenv('COMPUTERNAME'))
+    }
+
+    sb.append(".apk")
+    println("Apk name: " + sb.toString())
+    return sb.toString()
+}
+
+// ------------------------------------------------------------------------
+// CONFIGURE PROJECT
+// ------------------------------------------------------------------------
+
+
+android {
+    defaultConfig {
+        // configure some project specific fields
+        buildConfigField project.INT, project.BUILD_NUMBER, String.valueOf(project.buildNumber)
+        buildConfigField project.STRING, project.BUILD_TIME, project.buildTime
+        buildConfigField project.BOOLEAN, project.HAS_BUILD_NUMBER, String.valueOf(project.hasBuildNumber)
+        buildConfigField project.STRING, project.USERNAME, ("\"" + System.getenv('USERNAME') + "\"")
+        buildConfigField project.STRING, project.COMPUTERNAME, ("\"" + System.getenv('COMPUTERNAME') + "\"")
+        buildConfigField project.BOOLEAN, project.PRODUCTION, (System.getenv('PRODUCTION') != null ? System.getenv('PRODUCTION') : "false")
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = getAPKFileName(variant)
+        }
+    }
+}
