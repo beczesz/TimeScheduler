@@ -36,7 +36,7 @@ project.ext.versionName = String.format("%d.%d.%d", project.ext.versionMajor, pr
 project.ext.versionNum = Integer.parseInt(String.format("%02d%02d%04d", project.ext.versionMajor, project.ext.versionMinor, project.ext.versionPatch))
 project.ext.versionDate = new Date()
 
-project.ext.appName = 'TimeScheuler'
+project.ext.appName = 'TimeScheduler'
 project.ext.appId = 'com.exarlabs.timescheduler'
 
 task clean(type: Delete) {

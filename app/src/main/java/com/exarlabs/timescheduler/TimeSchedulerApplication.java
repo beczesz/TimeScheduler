@@ -58,6 +58,7 @@ public class TimeSchedulerApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        setInstance(this);
         initLibs();
     }
 

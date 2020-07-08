@@ -1,0 +1,79 @@
+<resources>
+
+    <!--
+    ****************************************
+    * Text Styles
+    ****************************************
+    -->
+    <!-- Text -->
+
+    <style name="Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:paddingTop">@dimen/material_component_dialogs_padding_between_title_and_body_text</item>
+        <item name="android:paddingBottom">@dimen/material_component_dialogs_padding_between_title_and_body_text</item>
+    </style>
+
+    <style name="Title.Subject" parent="TextAppearance.AppCompat.Title">
+        <item name="android:paddingTop">@dimen/material_component_cards_space_between_cards</item>
+    </style>
+
+
+    <style name="Title.OneLine" parent="Title">
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Body1" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="RecipientsSpan" parent="Body1">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textColorLink">@color/textColorSecondary</item>
+    </style>
+
+    <style name="Body2" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="Caption.Centered" parent="Caption">
+        <item name="android:textColor">@color/textColorSecondary</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Caption.Devel" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/devel</item>
+    </style>
+
+    <style name="Caption.Accent" parent="Caption">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Caption.Accent.Slim" parent="Caption">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Caption.White" parent="Caption">
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+
+
+    <style name="Display1" parent="TextAppearance.AppCompat.Display1"/>
+
+    <style name="Display2" parent="TextAppearance.AppCompat.Display2"/>
+
+    <style name="Display3" parent="TextAppearance.AppCompat.Display3"/>
+
+    <style name="Display4" parent="TextAppearance.AppCompat.Display4"/>
+
+    <style name="Headline" parent="TextAppearance.AppCompat.Headline">
+    </style>
+
+
+
+</resources>

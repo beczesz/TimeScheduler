@@ -1,4 +1,4 @@
-package com.bluerisc.eprivo.utils.date.formatter;
+package com.exarlabs.timescheduler.utils.date.formatter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +24,7 @@ public class DateFormatterUtils {
         HH24_MM("HH:mm"),
         dM("d. MMM"),
         MMMd("MMM d"),
+        EEE_MMM_DD_YYYY("EEE MMM dd, yyyy"),
         MMM_DD_YYYY("MMM dd, yyyy"),
         MM_DD_YYYY("MM/dd/yyyy"),
         EEE_DD_MMM("EEE dd/MMM"),

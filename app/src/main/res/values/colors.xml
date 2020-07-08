@@ -1,10 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Eprivo colors -->
+    <color name="transparent">#00000000</color>
+    <color name="ep_red">#B83336</color>
+    <color name="ep_red_bright">#d92000</color>
+    <color name="ep_red_26">#EDCBCC</color>
+
+    <!-- Default base colors-->
+    <color name="colorPrimary">#111111</color>
+    <color name="colorPrimaryDark">@color/md_black_1000</color>
+    <color name="colorAccent">@color/ep_red</color>
+    <color name="colorAccentDisabled">@color/ep_red_26</color>
+    <color name="colorDisabled">#757575</color>
+    <color name="colorOff">#ECEBEC</color>
+
+    <color name="windowBackground">@color/md_white_1000</color>
+
+    <color name="textColorPrimary">@color/md_black_1000</color>
+    <color name="textColorPrimaryInverse">@color/md_white_1000</color>
+    <color name="textColorSecondary">@color/md_grey_600</color>
+    <color name="textColorDisabled">#8e8e8e</color>
+
+    <!-- Night theme base colors-->
+    <color name="colorPrimaryNight">@color/ep_red</color>
+    <color name="colorPrimaryDarkNight">@color/transparent</color>
+    <color name="colorAccentNight">@color/ep_red</color>
+    <color name="textColorPrimaryNight">@color/md_white_1000</color>
+    <color name="windowBackgroundNight">@color/md_black_1000</color>
+    <color name="windowBackgroundSemiDark">@color/md_grey_900</color>
+
+
+
+    <!--  Other -->
+    <color name="icon_light">@color/md_grey_400</color>
+    <color name="icon">@color/md_grey_800</color>
+    <color name="info">@color/md_blue_600</color>
+    <color name="info_background">@color/md_blue_100</color>
+    <color name="success">@color/md_green_600</color>
+    <color name="success_bg">@color/md_green_200</color>
+    <color name="error">@color/colorAccent</color>
+    <color name="pending">@color/md_orange_600</color>
+    <color name="warning">@color/md_yellow_600</color>
+    <color name="warning_bg">@color/md_yellow_200</color>
+    <color name="purple">@color/material_purple_600</color>
+    <color name="devel">@color/material_purple_600</color>
+    <color name="devel_inactive">@color/material_purple_300</color>
+    <color name="devel_error">@color/material_red_200</color>
+    <color name="developer_background">@color/material_purple_100</color>
+
+    <!--    This is needed by the https://github.com/Kennyc1012/BottomSheetMenu-->
+    <color name="bottom_sheet_list_item_color_dark">@color/icon</color>
+    <color name="bottom_sheet_list_item_color_light">@color/textColorPrimaryInverse</color>
+
+    <!-- panel -->
+
+    <color name="divider">#1e000000</color>
+    <color name="background">#EDEDED</color>
+
+    <color name="defaultTextColor">@android:color/tertiary_text_light</color>
+
+
+
+
+    <!-- Default Colors !-->
+
+    <color name="color1">#2062af</color>
+    <color name="color2">#58AEB7</color>
+    <color name="color3">#F4B528</color>
+    <color name="color4">#DD3E48</color>
+    <color name="color5">#BF89AE</color>
+
+    <color name="color6">#5C88BE</color>
+    <color name="color7">#59BC10</color>
+    <color name="color8">#E87034</color>
+    <color name="color9">#f84c44</color>
+    <color name="color10">#8c47fb</color>
+
+    <color name="color11">#51C1EE</color>
+    <color name="color12">#8cc453</color>
+    <color name="color13">#C2987D</color>
+    <color name="color14">#CE7777</color>
+    <color name="color15">#9086BA</color>
+
+    <color name="white">#ffffff</color>
+    <color name="lite_blue">#42a5f5</color>
+    <color name="window_background">#00000000</color>
+    <color name="black_de">#000000</color>
+
+    <array name="default_colors">
+        <item>@color/color1</item>
+        <item>@color/color2</item>
+        <item>@color/color3</item>
+        <item>@color/color4</item>
+        <item>@color/color5</item>
+
+        <item>@color/color6</item>
+        <item>@color/color7</item>
+        <item>@color/color8</item>
+        <item>@color/color9</item>
+        <item>@color/color10</item>
+
+        <item>@color/color11</item>
+        <item>@color/color12</item>
+        <item>@color/color13</item>
+        <item>@color/color14</item>
+        <item>@color/color15</item>
+
+    </array>
+
+
+
 </resources>

@@ -1,14 +1,17 @@
 package com.exarlabs.timescheduler;
 
-import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.exarlabs.timescheduler.business.RxManager;
+import com.exarlabs.timescheduler.business.SessionManager;
 import com.exarlabs.timescheduler.ui.base.BaseActivity;
+import com.exarlabs.timescheduler.utils.date.formatter.DateFormatterUtils;
 
-public class MainActivity extends BaseActivity {
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity implements SessionManager.SessionEventListener {
 
 
     // ------------------------------------------------------------------------
@@ -26,6 +29,14 @@ public class MainActivity extends BaseActivity {
     // ------------------------------------------------------------------------
     // FIELDS
     // ------------------------------------------------------------------------
+    @Inject
+    SessionManager mSessionManager;
+
+    @BindView (R.id.tv_date)
+    TextView mDateTv;
+
+    @BindView (R.id.tv_time)
+    TextView mTimeTv;
 
     // ------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -40,9 +51,37 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RxManager.executeLaterOnMain(3, TimeUnit.SECONDS, aLong -> {
-            Toast.makeText(this, "Heureka", Toast.LENGTH_SHORT).show();
-        });
+        showActionBar(false);
+
+        TimeSchedulerApplication.component().inject(this);
+
+        startSession();
+    }
+
+    private void updateUI() {
+        mDateTv.setText(DateFormatterUtils.format(System.currentTimeMillis(), DateFormatterUtils.DateFormatter.EEE_MMM_DD_YYYY));
+        mTimeTv.setText(DateFormatterUtils.format(System.currentTimeMillis(), DateFormatterUtils.DateFormatter.H_MM_AA));
+    }
+
+    private void startSession() {
+        mSessionManager.startSessionTimer();
+        mSessionManager.addSessionEventListener(this);
+    }
+
+    @Override
+    public void onSessionStarted() {
+
+    }
+
+    @Override
+    public void onSessionTimerTick(long totalTime) {
+        updateUI();
+    }
+
+
+    @Override
+    public void onSessionExpired() {
+
     }
 
     // ------------------------------------------------------------------------
