@@ -1,15 +1,13 @@
-package com.exarlabs.timescheduler;
+package com.bluerisc.eprivo.business.rx;
 
-import java.util.concurrent.TimeUnit;
+import rx.Subscriber;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.exarlabs.timescheduler.business.RxManager;
-import com.exarlabs.timescheduler.ui.base.BaseActivity;
-
-public class MainActivity extends BaseActivity {
-
+/**
+ * This Observer just adds dummy implementation for the traditional observer callbacks
+ * and forwards the result to one method
+ * Created by becze on 11/27/2015.
+ */
+public abstract class CallbackSubscriber<T> extends Subscriber<T> {
 
     // ------------------------------------------------------------------------
     // TYPES
@@ -27,6 +25,10 @@ public class MainActivity extends BaseActivity {
     // FIELDS
     // ------------------------------------------------------------------------
 
+    /**
+     * Flag marking whether this subscruber is already completed
+     */
+    private boolean mIsCompleted;
     // ------------------------------------------------------------------------
     // CONSTRUCTORS
     // ------------------------------------------------------------------------
@@ -35,17 +37,39 @@ public class MainActivity extends BaseActivity {
     // METHODS
     // ------------------------------------------------------------------------
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    /**
+     * Returns the result if it was successful, otherwise an error.
+     *
+     * @param result the result of the call or null if there was an error.
+     * @param e On success it will be null, otherwise the error.
+     */
+    abstract public void onResult(T result, Throwable e);
 
-        RxManager.executeLaterOnMain(3, TimeUnit.SECONDS, aLong -> {
-            Toast.makeText(this, "Heureka", Toast.LENGTH_SHORT).show();
-        });
+    @Override
+    public void onCompleted() {
+        doCallOnResult(null, null);
     }
 
+    private void doCallOnResult(T result, Throwable e) {
+        if (!mIsCompleted) {
+            onResult(result, e);
+            mIsCompleted = true;
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        onResult(null, e);
+    }
+
+    @Override
+    public void onNext(T o) {
+        doCallOnResult(o, null);
+        onCompleted();
+    }
+
+
     // ------------------------------------------------------------------------
-    // GETTERS / SETTERS
+    // GETTERS / SETTTERS
     // ------------------------------------------------------------------------
 }
