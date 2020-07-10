@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.exarlabs.timescheduler.MainActivity;
 import com.exarlabs.timescheduler.TimeSchedulerApplication;
+import com.exarlabs.timescheduler.business.EventManager;
 
 /**
  * Here are listed all the locations where injection is needed.
@@ -18,4 +19,6 @@ public interface DaggerComponentGraph {
     void inject(MainActivity app);
 
     void inject(TimeSchedulerApplication app);
+
+    void inject(EventManager eventManager);
 }

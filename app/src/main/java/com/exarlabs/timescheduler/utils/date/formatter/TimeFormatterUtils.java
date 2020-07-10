@@ -63,7 +63,7 @@ public class TimeFormatterUtils {
     // FIELDS
     // ------------------------------------------------------------------------
 
-    public static final String DURATION_FROMAT_HHh_MMm_SSs = "%02dh:%02dm:%02ds";
+    public static final String DURATION_FROMAT_HHh_MMm_SSs = "%02d:%02d:%02d";
     public static final String DURATION_FROMAT_MM_SS = "%02d:%02d";
 
     // ------------------------------------------------------------------------
