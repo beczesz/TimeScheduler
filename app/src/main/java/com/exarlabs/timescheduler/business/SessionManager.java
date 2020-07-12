@@ -90,7 +90,7 @@ public class SessionManager {
         }
 
         //@formatter:off
-        mSessionSubscription = Observable.interval(1, TimeUnit.SECONDS, Schedulers.io())
+        mSessionSubscription = Observable.interval(100, TimeUnit.MILLISECONDS, Schedulers.io())
                         .onBackpressureDrop(timeout -> Timber.w( "drop timer : " + timeout))
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())

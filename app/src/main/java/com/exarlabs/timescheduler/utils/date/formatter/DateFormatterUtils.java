@@ -28,6 +28,7 @@ public class DateFormatterUtils {
         MMM_DD_YYYY("MMM dd, yyyy"),
         MM_DD_YYYY("MM/dd/yyyy"),
         EEE_DD_MMM("EEE dd/MMM"),
+        EEE_DD_MMM_H_MM_AA("EEE, dd MMM, h:mm aa"),
         YYYY_MM_DD("yyyy-MM-dd"),
         DD_MMM_YYYY("dd-MMM-yyyy"),
         YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),

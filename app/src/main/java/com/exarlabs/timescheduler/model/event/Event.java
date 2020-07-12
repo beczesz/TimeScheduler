@@ -1,5 +1,6 @@
 package com.exarlabs.timescheduler.model.event;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -28,19 +29,26 @@ public abstract class Event {
     /**
      * The total duration of the event in seconds
      */
-    private int mTotalDuration = 1;
+    private long mStartTimestamp = 1;
+    private long mEndTimestamp = 1;
     private Map<Integer, Marker> mMarkerMap;
 
     // ------------------------------------------------------------------------
     // CONSTRUCTORS
     // ------------------------------------------------------------------------
 
+    public Event() {
+        mMarkerMap = new HashMap<>();
+        mStartTimestamp = System.currentTimeMillis();
+        mEndTimestamp = System.currentTimeMillis();
+    }
+
+
     // ------------------------------------------------------------------------
     // METHODS
     // ------------------------------------------------------------------------
 
     /**
-     *
      * @return the Event name which can be displayed
      */
     public abstract String getEventName();
@@ -55,8 +63,8 @@ public abstract class Event {
         Timber.d("onSessionTick() called with: sessionCounter = [" + sessionCounter + "]");
         if (mMarkerMap != null) {
             for (Integer integer : mMarkerMap.keySet()) {
-                if (integer == sessionCounter % mTotalDuration) {
-                    return mMarkerMap.get(integer);
+                if (integer == getRemainingSeconds() - 1) {
+                    return mMarkerMap.remove(integer);
                 }
             }
         }
@@ -64,20 +72,47 @@ public abstract class Event {
         return Marker.NO_EVENT;
     }
 
+    int getDuration() {
+        return (int) ((getEndTimestamp() - getStartTimestamp()) / 1000);
+    }
+
+    int getRemainingSeconds() {
+        return (int) ((getEndTimestamp() - System.currentTimeMillis()) / 1000);
+    }
+
     // ------------------------------------------------------------------------
     // GETTERS / SETTERS
     // ------------------------------------------------------------------------
 
 
-    public int getTotalDuration() {
-        return mTotalDuration;
+    public long getEndTimestamp() {
+        return mEndTimestamp;
     }
 
-    public void setTotalDuration(int totalDuration) {
-        mTotalDuration = totalDuration;
+    public void setEndTimestamp(long endTimestamp) {
+        mEndTimestamp = endTimestamp;
     }
 
-    public  boolean isExpired() {
-        return true;
+    public long getStartTimestamp() {
+        return mStartTimestamp;
     }
+
+    public void setStartTimestamp(long startTimestamp) {
+        mStartTimestamp = startTimestamp;
+    }
+
+    public boolean isExpired() {
+        return System.currentTimeMillis() > getEndTimestamp();
+    }
+
+
+    Marker addMarker(Integer integer, Marker marker) {
+        return mMarkerMap.put(integer, marker);
+    }
+
+    protected Map<Integer, Marker> getMarkerMap() {
+        return mMarkerMap;
+    }
+
+    public abstract Marker getFinishMarker();
 }

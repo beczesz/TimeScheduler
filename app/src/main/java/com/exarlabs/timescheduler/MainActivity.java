@@ -1,5 +1,8 @@
 package com.exarlabs.timescheduler;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import android.os.Bundle;
@@ -76,16 +79,22 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
         mTimeTv.setText(DateFormatterUtils.format(System.currentTimeMillis(), DateFormatterUtils.DateFormatter.H_MM_AA));
 
         Event upcommingEvent = mEventManager.getUpcommingEvent();
-        long duration = 0;
+        String eventDateFormat = "";
         String nextEvent = "";
 
         if (upcommingEvent != null) {
-            int totalDuration = upcommingEvent.getTotalDuration();
-            duration = totalDuration - totalTime % totalDuration;
-            nextEvent = upcommingEvent.getEventName();
+            long endTimestamp = upcommingEvent.getEndTimestamp();
+            if (endTimestamp - System.currentTimeMillis() < TimeUnit.DAYS.toMillis(1)) {
+                int secondsUntilEnd = (int) ((endTimestamp - System.currentTimeMillis()) / 1000);
+                nextEvent = upcommingEvent.getEventName() + " in";
+                eventDateFormat = TimeFormatterUtils.format(secondsUntilEnd);
+            } else {
+                nextEvent = upcommingEvent.getEventName() + " at";
+                eventDateFormat = DateFormatterUtils.format(new Date(endTimestamp), DateFormatterUtils.DateFormatter.EEE_DD_MMM_H_MM_AA);
+            }
         }
 
-        mRemainingTime.setText(TimeFormatterUtils.format(duration));
+        mRemainingTime.setText(eventDateFormat);
         mEventName.setText(nextEvent);
     }
 

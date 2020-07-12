@@ -1,4 +1,4 @@
-package com.bluerisc.eprivo.utils;
+package com.exarlabs.timescheduler.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,6 @@ import android.text.format.DateUtils;
 /**
  * Created by jordi on 19/02/17.
  */
-@Deprecated
 public class TimeUtils {
 
 
@@ -71,8 +70,12 @@ public class TimeUtils {
     }
 
     @Deprecated
-    public static long getTimeStampFromDate(Date date) {
-        return date.getTime() / 1000L;
+    public static int getTimeStampFromDate(Date date) {
+        return (int) (date.getTime() / 1000L);
+    }
+
+    public static int getNrSecondsUntil (long timeStamp) {
+        return (int) (timeStamp - System.currentTimeMillis());
     }
 
     @Deprecated
