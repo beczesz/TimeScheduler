@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Default app dimensions -->
+    <dimen name="divider_height">0.5dip</dimen>
+
+    <dimen name="stroke_width">1dip</dimen>
+
+    <dimen name="special_privacy_icon">18dip</dimen>
+
+    <!-- Default spacing -->
+    <dimen name="padding_micro">2dip</dimen>
+    <dimen name="padding_tiny">3dip</dimen>
+    <dimen name="padding_small">8dip</dimen>
+    <dimen name="padding_default">12dip</dimen>
+    <dimen name="padding_large">16dip</dimen>
+    <dimen name="padding_xlarge">20dip</dimen>
+    <dimen name="padding_xxlarge">30dip</dimen>
+    <dimen name="padding_xxxlarge">40dip</dimen>
+
+
+    <!-- Panels size -->
+    <dimen name="panel_small">32dip</dimen>
+    <dimen name="panel">48dip</dimen>
+    <dimen name="panel_height_large">72dip</dimen>
+    <dimen name="panel_height_xlarge">96dip</dimen>
+    <dimen name="panel_xxlarge">128dip</dimen>
+    <dimen name="panel_xxxlarge">180dip</dimen>
+
+
+    <dimen name="small_label">10sp</dimen>
+    <dimen name="label">12sp</dimen>
+    <dimen name="normal_label">14sp</dimen>
+    <!-- Containers-->
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
+    <item name="item_touch_helper_previous_elevation" type="id"/>
+    <dimen name="touch_raise">12dp</dimen>
+    <dimen name="eprivo_contact_row_height">110dp</dimen>
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="action_button_height">32dp</dimen>
+    <dimen name="action_button_text_size">14sp</dimen>
+    <dimen name="action_button_min_width">56dp</dimen>
+    <dimen name="action_button_padding_horizontal">4dp</dimen>
+
+</resources>

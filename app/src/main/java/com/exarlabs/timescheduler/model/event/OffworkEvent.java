@@ -45,7 +45,7 @@ public class OffworkEvent extends Event {
             cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         } else {
             cal.setTimeInMillis(System.currentTimeMillis());
-            if (cal.get(Calendar.HOUR) > 8) {
+            if (cal.get(Calendar.HOUR_OF_DAY) > 8) {
                 cal.setTimeInMillis(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1));
             }
         }

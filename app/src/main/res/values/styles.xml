@@ -75,5 +75,73 @@
     </style>
 
 
+       <!-- Icons -->
+    <style name="Icon">
+        <item name="android:textColor">@drawable/icon_color</item>
+        <item name="android:textSize">@dimen/material_typography_subheading</item>
+        <item name="android:paddingLeft">@dimen/material_component_lists_icon_left_padding</item>
+        <item name="android:paddingRight">@dimen/material_component_lists_icon_left_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="Icon.NoPadding" parent="Icon">
+        <item name="android:padding">@dimen/padding_tiny</item>
+    </style>
+
+    <style name="Icon.NormalTouch" parent="Icon">
+        <item name="android:paddingLeft">@dimen/padding_default</item>
+        <item name="android:paddingRight">@dimen/padding_default</item>
+    </style>
+
+    <style name="Icon.MessageActions" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_headline</item>
+        <item name="android:padding">@dimen/padding_default</item>
+    </style>
+
+    <style name="Icon.Toolbar">
+        <item name="android:textColor">@color/textColorPrimaryInverse</item>
+        <item name="android:textSize">@dimen/material_typography_headline</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="Icon.Medium" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_headline</item>
+    </style>
+
+
+    <style name="Icon.Large" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_display1</item>
+    </style>
+
+    <style name="Icon.XLarge" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_display2</item>
+    </style>
+
+    <style name="Icon.XXLarge" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_display3</item>
+    </style>
+
+    <style name="Icon.XXXLarge" parent="Icon">
+        <item name="android:textSize">@dimen/material_typography_display4</item>
+    </style>
+
+    <style name="Icon.Info" parent="Icon">
+        <item name="android:textColor">@color/info</item>
+    </style>
+
+    <style name="Icon.Error" parent="Icon">
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="Icon.Devel" parent="Icon">
+        <item name="android:textColor">@color/devel</item>
+    </style>
+
+    <style name="Icon.Success" parent="Icon">
+        <item name="android:textColor">@color/success</item>
+    </style>
+
 
 </resources>

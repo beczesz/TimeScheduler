@@ -51,6 +51,7 @@ public class EventManager implements SessionManager.SessionEventListener {
 
     @Inject
     Context mContext;
+    private boolean mMuted;
 
     // ------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -118,6 +119,10 @@ public class EventManager implements SessionManager.SessionEventListener {
      */
     private void playAudio(Marker marker) {
         Timber.d("playAudio() called with: marker = [" + marker + "]");
+        if (mMuted) {
+            return;
+        }
+
         if (mMarkerMap.containsKey(marker)) {
             List<Integer> resources = mMarkerMap.get(marker);
             int randomIndex = (int) (Math.random() * resources.size());
@@ -145,5 +150,13 @@ public class EventManager implements SessionManager.SessionEventListener {
 
     public Event getUpcommingEvent() {
         return mUpcommingEvent;
+    }
+
+    public void setMuted(boolean muted) {
+        mMuted = muted;
+    }
+
+    public boolean getMuted() {
+        return mMuted;
     }
 }

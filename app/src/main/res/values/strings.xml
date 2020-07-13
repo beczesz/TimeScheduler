@@ -2,4 +2,6 @@
     <string name="app_name">TimeScheduler</string>
     <string name="just_now">Just now</string>
     <string name="zero_minutes_ago">0 minutes ago</string>
+    <string name="mute">Mute</string>
+    <string name="un_mute">Unmute</string>
 </resources>

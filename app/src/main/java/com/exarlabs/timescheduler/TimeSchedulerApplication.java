@@ -5,6 +5,8 @@ import android.app.Application;
 import com.exarlabs.timescheduler.business.dagger.components.AppComponent;
 import com.exarlabs.timescheduler.business.dagger.components.DaggerComponentGraph;
 import com.exarlabs.timescheduler.business.utils.logging.TimberPlanter;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.Iconics;
 
 /**
  * Application base class implementation
@@ -67,6 +69,9 @@ public class TimeSchedulerApplication extends Application {
 
         // Initialize dagger
         buildComponentAndInject(this);
+
+        // Register the font icons
+        Iconics.registerFont(new FontAwesome());
 
     }
 

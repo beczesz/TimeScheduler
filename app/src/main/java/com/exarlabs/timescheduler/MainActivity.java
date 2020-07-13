@@ -37,6 +37,9 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
     // ------------------------------------------------------------------------
     // FIELDS
     // ------------------------------------------------------------------------
+
+    private boolean mIsMuted;
+
     @BindView (R.id.tv_date)
     TextView mDateTv;
 
@@ -48,6 +51,9 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
     @BindView (R.id.tv_remaining_time)
     TextView mRemainingTime;
+
+    @BindView (R.id.ic_mute)
+    TextView mMuteIcon;
 
     @Inject
     SessionManager mSessionManager;
@@ -82,10 +88,20 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
         TimeSchedulerApplication.component().inject(this);
 
+        initUI();
         startSession();
     }
 
-    private void updateUI(long totalTime) {
+    private void initUI() {
+        mMuteIcon.setText(R.string.mute);
+        mMuteIcon.setOnClickListener(view -> {
+            mIsMuted = !mIsMuted;
+            mMuteIcon.setText(mIsMuted ? R.string.un_mute : R.string.mute);
+            mEventManager.setMuted(mIsMuted);
+        });
+    }
+
+    private void updateUI() {
         mDateTv.setText(DateFormatterUtils.format(System.currentTimeMillis(), DateFormatterUtils.DateFormatter.EEE_MMM_DD_YYYY));
         mTimeTv.setText(DateFormatterUtils.format(System.currentTimeMillis(), DateFormatterUtils.DateFormatter.H_MM_AA));
 
@@ -107,6 +123,7 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
         mRemainingTime.setText(eventDateFormat);
         mEventName.setText(nextEvent);
+
     }
 
     private void startSession() {
@@ -121,7 +138,7 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
     @Override
     public void onSessionTimerTick(long totalTime) {
-        updateUI(totalTime);
+        updateUI();
     }
 
 
