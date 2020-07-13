@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.exarlabs.timescheduler.business.EventManager;
@@ -68,6 +70,15 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
         setContentView(R.layout.activity_main);
 
         showActionBar(false);
+
+        Window window = getWindow();
+
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
 
         TimeSchedulerApplication.component().inject(this);
 

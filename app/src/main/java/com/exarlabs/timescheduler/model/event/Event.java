@@ -63,7 +63,7 @@ public abstract class Event {
         Timber.d("onSessionTick() called with: sessionCounter = [" + sessionCounter + "]");
         if (mMarkerMap != null) {
             for (Integer integer : mMarkerMap.keySet()) {
-                if (integer == getRemainingSeconds() - 1) {
+                if (integer == getRemainingSeconds()) {
                     return mMarkerMap.remove(integer);
                 }
             }
