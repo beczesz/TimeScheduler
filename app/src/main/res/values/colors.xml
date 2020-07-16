@@ -7,7 +7,7 @@
     <color name="ep_red_26">#EDCBCC</color>
 
     <!-- Default base colors-->
-    <color name="colorPrimary">#111111</color>
+    <color name="colorPrimary">@color/md_black_1000</color>
     <color name="colorPrimaryDark">@color/md_black_1000</color>
     <color name="colorAccent">@color/ep_red</color>
     <color name="colorAccentDisabled">@color/ep_red_26</color>

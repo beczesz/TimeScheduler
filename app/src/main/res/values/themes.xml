@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.TimeScheduler" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_black_1000</item>
-        <item name="colorPrimaryDark">@color/md_black_1000</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/material_teal_200</item>
         <item name="colorSecondaryVariant">@color/material_teal_700</item>
-        <item name="colorOnSecondary">@color/md_black_1000</item>
+        <item name="colorOnSecondary">@color/colorPrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/md_black_1000</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 
