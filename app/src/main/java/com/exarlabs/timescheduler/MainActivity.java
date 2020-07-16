@@ -18,6 +18,7 @@ import com.exarlabs.timescheduler.utils.date.formatter.DateFormatterUtils;
 import com.exarlabs.timescheduler.utils.date.formatter.TimeFormatterUtils;
 
 import butterknife.BindView;
+import butterknife.OnLongClick;
 
 public class MainActivity extends BaseActivity implements SessionManager.SessionEventListener {
 
@@ -146,6 +147,13 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
     public void onSessionExpired() {
 
     }
+
+    @OnLongClick (R.id.ic_mute)
+    boolean onTestVoice() {
+        mEventManager.testVoice();
+        return true;
+    }
+
 
     // ------------------------------------------------------------------------
     // GETTERS / SETTERS

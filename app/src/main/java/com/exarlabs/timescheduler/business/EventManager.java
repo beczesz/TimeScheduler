@@ -68,6 +68,36 @@ public class EventManager implements SessionManager.SessionEventListener {
         mMarkerMap.put(Marker.ONE_MINUTES_REMINDER, Arrays.asList(R.raw.one_more_minute));
         mMarkerMap.put(Marker.GO_3_2_1, Arrays.asList(R.raw.go_3_2_1));
         mMarkerMap.put(Marker.END, Arrays.asList(R.raw.end));
+        mMarkerMap.put(Marker.TEST, Arrays.asList(
+                        R.raw.voice_test,
+                        R.raw.voice_test1,
+                        R.raw.voice_test2,
+                        R.raw.voice_test3,
+                        R.raw.voice_test4,
+                        R.raw.voice_test5,
+                        R.raw.voice_test6,
+                        R.raw.voice_test7,
+                        R.raw.voice_test8,
+                        R.raw.voice_test9,
+                        R.raw.voice_test10,
+                        R.raw.voice_test11,
+                        R.raw.voice_test12,
+                        R.raw.voice_test13,
+                        R.raw.voice_test14,
+                        R.raw.voice_test15,
+                        R.raw.voice_test16,
+                        R.raw.voice_test17,
+                        R.raw.voice_test18,
+                        R.raw.voice_test19,
+                        R.raw.voice_test20,
+                        R.raw.voice_test21,
+                        R.raw.voice_test22,
+                        R.raw.voice_test23,
+                        R.raw.voice_test24,
+                        R.raw.voice_test25,
+                        R.raw.voice_test26,
+                        R.raw.voice_test27
+        ));
     }
 
     /**
@@ -128,9 +158,14 @@ public class EventManager implements SessionManager.SessionEventListener {
             int randomIndex = (int) (Math.random() * resources.size());
             Integer resId = resources.get(randomIndex);
 
-            MediaPlayer mPlayer = MediaPlayer.create(mContext, resId);
-            mPlayer.start();
+            playMediaWithRes(resId);
         }
+    }
+
+    private void playMediaWithRes(Integer resId) {
+        MediaPlayer mPlayer = MediaPlayer.create(mContext, resId);
+        mPlayer.start();
+        mPlayer.setOnCompletionListener(mediaPlayer -> mediaPlayer.release());
     }
 
     @Override
@@ -138,6 +173,10 @@ public class EventManager implements SessionManager.SessionEventListener {
 
     }
 
+
+    public void testVoice() {
+        playAudio(Marker.TEST);
+    }
 
     // ------------------------------------------------------------------------
     // METHODS
@@ -159,4 +198,5 @@ public class EventManager implements SessionManager.SessionEventListener {
     public boolean getMuted() {
         return mMuted;
     }
+
 }

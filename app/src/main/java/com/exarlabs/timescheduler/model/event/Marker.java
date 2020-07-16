@@ -10,5 +10,6 @@ public enum Marker {
     TEN_MINUTES_REMINDER,
     ONE_MINUTES_REMINDER,
     GO_3_2_1,
+    TEST,
     BREAK_3_2_1;
 }
