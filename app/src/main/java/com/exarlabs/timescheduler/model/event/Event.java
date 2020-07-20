@@ -3,8 +3,6 @@ package com.exarlabs.timescheduler.model.event;
 import java.util.HashMap;
 import java.util.Map;
 
-import timber.log.Timber;
-
 /**
  * Abstarct implementation of an event
  */
@@ -60,7 +58,6 @@ public abstract class Event {
      * @return
      */
     public Marker onSessionTick(long sessionCounter) {
-        Timber.d("onSessionTick() called with: sessionCounter = [" + sessionCounter + "]");
         if (mMarkerMap != null) {
             for (Integer integer : mMarkerMap.keySet()) {
                 if (integer == getRemainingSeconds()) {
