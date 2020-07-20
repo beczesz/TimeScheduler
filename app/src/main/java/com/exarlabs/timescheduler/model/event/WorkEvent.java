@@ -39,7 +39,7 @@ public class WorkEvent extends Event {
 
         addMarker((int) TimeUnit.MINUTES.toSeconds(10), Marker.TEN_MINUTES_REMINDER);
         addMarker((int) TimeUnit.MINUTES.toSeconds(1), Marker.ONE_MINUTES_REMINDER);
-        addMarker(3, Marker.GO_3_2_1);
+        addMarker(3, Marker.BREAK_3_2_1);
     }
 
     public static boolean isWorkHour() {

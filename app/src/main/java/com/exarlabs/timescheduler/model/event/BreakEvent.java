@@ -37,7 +37,7 @@ public class BreakEvent extends Event {
         setEndTimestamp(cal.getTimeInMillis());
 
         addMarker((int) TimeUnit.MINUTES.toSeconds(1), Marker.ONE_MINUTES_REMINDER);
-        addMarker(3, Marker.BREAK_3_2_1);
+        addMarker(3, Marker.GO_3_2_1);
     }
 
 
