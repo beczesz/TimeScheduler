@@ -25,7 +25,8 @@ public class OffworkEvent extends Event {
      */
     public static boolean isWeekend() {
         Calendar c1 = Calendar.getInstance();
-        return c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+        return c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY ||
+                        (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY && c1.get(Calendar.HOUR_OF_DAY) >= 18);
     }
 
     // ------------------------------------------------------------------------

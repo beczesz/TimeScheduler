@@ -9,9 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
+import android.net.Uri;
 
 import com.exarlabs.timescheduler.R;
 import com.exarlabs.timescheduler.TimeSchedulerApplication;
@@ -20,8 +18,14 @@ import com.exarlabs.timescheduler.model.event.Event;
 import com.exarlabs.timescheduler.model.event.Marker;
 import com.exarlabs.timescheduler.model.event.OffworkEvent;
 import com.exarlabs.timescheduler.model.event.WorkEvent;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 
 import timber.log.Timber;
+
 
 /**
  * Manages the events, generating the next event
@@ -143,25 +147,14 @@ public class EventManager implements SessionManager.SessionEventListener {
     }
 
     private void playMediaWithRes(Integer resId) {
-        Timber.d("playMediaWithRes() called with: resId = [" + resId + "]");
-        MediaPlayer mPlayer = MediaPlayer.create(mContext, resId);
-        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mPlayer.setLooping(false);
-        mPlayer.start();
-        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                Timber.d("onCompletion() called with: mediaPlayer = [" + mediaPlayer + "]");
-                mediaPlayer.release();
-            }
-        });
-    }
+        Uri uri = RawResourceDataSource.buildRawResourceUri(resId);
 
-    private void playMediaWithSP(Integer resId) {
-        Timber.d("playMediaWithRes() called with: resId = [" + resId + "]");
-        SoundPool soundPool = new SoundPool(1, AudioManager.STREAM_NOTIFICATION, 100);
-        int load = soundPool.load(mContext, resId, 1);
-        soundPool.play(load, 1, 1, 10, 0, 1);
+        ExtractorMediaSource audioSource = new ExtractorMediaSource(uri, new DefaultDataSourceFactory(mContext, "MyExoplayer"),
+                                                                    new DefaultExtractorsFactory(), null, null);
+
+        SimpleExoPlayer player = new SimpleExoPlayer.Builder(mContext).build();
+        player.prepare(audioSource);
+        player.setPlayWhenReady(true);
     }
 
     @Override
@@ -170,9 +163,6 @@ public class EventManager implements SessionManager.SessionEventListener {
     }
 
 
-    public void testVoice() {
-        playAudio(Marker.TEST);
-    }
 
     public void testLong() {
         playAudio(Marker.TEST_lONG);

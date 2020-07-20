@@ -94,6 +94,8 @@ dependencies {
     // UI
     // ------------------------------------------------------------------------
 
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.7'
+
     // Fonticons
     implementation "com.mikepenz:iconics-core:3.1.0"
     implementation 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'
