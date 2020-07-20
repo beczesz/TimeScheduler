@@ -278,7 +278,7 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
     @OnLongClick(R.id.ic_logo)
     boolean onLogoClick() {
-        Toast.makeText(this, "Version " + BuildConfig.VERSION_NAME, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.format("Version %s (#%d)", BuildConfig.VERSION_NAME, BuildConfig.BUILD_NUMBER), Toast.LENGTH_SHORT).show();
         return true;
     }
 
