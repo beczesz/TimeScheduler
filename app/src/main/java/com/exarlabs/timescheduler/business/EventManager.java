@@ -58,6 +58,7 @@ public class EventManager implements SessionManager.SessionEventListener {
     @Inject
     Context mContext;
     private boolean mMuted;
+    private SimpleExoPlayer mExoPlayer;
 
     // ------------------------------------------------------------------------
     // CONSTRUCTORS
@@ -66,6 +67,10 @@ public class EventManager implements SessionManager.SessionEventListener {
     public EventManager() {
         TimeSchedulerApplication.component().inject(this);
         mSessionManager.addSessionEventListener(this);
+
+
+        mExoPlayer = new SimpleExoPlayer.Builder(mContext).build();
+        mExoPlayer.setPlayWhenReady(true);
 
         mMarkerMap = new HashMap<>();
         mMarkerMap.put(Marker.MARKER, Arrays.asList(R.raw.marker));
@@ -152,9 +157,7 @@ public class EventManager implements SessionManager.SessionEventListener {
         ExtractorMediaSource audioSource = new ExtractorMediaSource(uri, new DefaultDataSourceFactory(mContext, "MyExoplayer"),
                                                                     new DefaultExtractorsFactory(), null, null);
 
-        SimpleExoPlayer player = new SimpleExoPlayer.Builder(mContext).build();
-        player.prepare(audioSource);
-        player.setPlayWhenReady(true);
+        mExoPlayer.prepare(audioSource);
     }
 
     @Override
@@ -165,7 +168,7 @@ public class EventManager implements SessionManager.SessionEventListener {
 
 
     public void testLong() {
-        playAudio(Marker.TEST_lONG);
+        playAudio(Marker.TEST);
     }
 
     // ------------------------------------------------------------------------
