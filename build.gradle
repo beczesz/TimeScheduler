@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.0-beta02"
+        classpath 'com.android.tools.build:gradle:4.1.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -30,7 +30,7 @@ allprojects {
 
 project.ext.versionMajor = 1
 project.ext.versionMinor = 0
-project.ext.versionPatch = 2
+project.ext.versionPatch = 3
 
 project.ext.versionName = String.format("%d.%d.%d", project.ext.versionMajor, project.ext.versionMinor, project.ext.versionPatch)
 project.ext.versionNum = Integer.parseInt(String.format("%02d%02d%04d", project.ext.versionMajor, project.ext.versionMinor, project.ext.versionPatch))
