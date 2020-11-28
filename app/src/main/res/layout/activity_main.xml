@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/cl_main_container"
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -50,6 +51,7 @@
         android:gravity="center"
         android:background="@drawable/rounded_corner_container"
         android:padding="@dimen/padding_default"
+        android:layout_margin="@dimen/padding_default"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -63,6 +65,18 @@
         android:scaleType="matrix"
         android:id="@+id/ic_logo"
         android:src="@drawable/logo"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/ic_fun_logo"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_fun_logo"
         app:layout_constraintBottom_toTopOf="@+id/tv_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +91,18 @@
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Mute"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/sw_fun_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_mute"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/padding_default"
+        app:layout_constraintTop_toTopOf="@+id/ic_mute" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

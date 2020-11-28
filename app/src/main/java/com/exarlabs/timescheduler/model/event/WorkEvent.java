@@ -51,7 +51,7 @@ public class WorkEvent extends Event {
 
         Calendar calEnd = Calendar.getInstance();
         calEnd.setTimeInMillis(System.currentTimeMillis());
-        calEnd.set(Calendar.HOUR_OF_DAY, 18);
+        calEnd.set(Calendar.HOUR_OF_DAY, 16);
         calEnd.set(Calendar.MINUTE, 0);
         calEnd.set(Calendar.SECOND, 0);
 

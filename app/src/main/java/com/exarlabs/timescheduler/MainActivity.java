@@ -17,6 +17,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import com.exarlabs.timescheduler.ui.base.BaseActivity;
 import com.exarlabs.timescheduler.utils.date.formatter.DateFormatterUtils;
 import com.exarlabs.timescheduler.utils.date.formatter.TimeFormatterUtils;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.OnLongClick;
 import rx.Observable;
@@ -41,9 +45,11 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
     // TYPES
     // ------------------------------------------------------------------------
 
+
     // ------------------------------------------------------------------------
     // STATIC FIELDS
     // ------------------------------------------------------------------------
+
 
     // ------------------------------------------------------------------------
     // STATIC METHODS
@@ -54,6 +60,10 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
     // ------------------------------------------------------------------------
 
     private boolean mIsMuted;
+    private int[] mFunBackgrounds;
+
+    @BindView (R.id.cl_main_container)
+    ConstraintLayout mMainContainer;
 
     @BindView (R.id.tv_date)
     TextView mDateTv;
@@ -69,6 +79,17 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
     @BindView (R.id.ic_mute)
     TextView mMuteIcon;
+
+    @BindView (R.id.sw_fun_mode)
+    Switch mFunMode;
+
+
+    @BindView (R.id.ic_logo)
+    ImageView mLogo;
+
+    @BindView (R.id.ic_fun_logo)
+    ImageView mFunLogo;
+
 
     @Inject
     SessionManager mSessionManager;
@@ -111,11 +132,38 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
     }
 
     private void initUI() {
+
+        mFunBackgrounds = new int[] { R.color.material_amber_900, R.color.material_blue_900, R.color.material_brown_900, R.color.material_cyan_900,
+                                      R.color.material_indigo_900, R.color.material_lime_900, R.color.material_orange_900, R.color.material_pink_900,
+                                      R.color.material_purple_900, R.color.material_red_900, R.color.material_deep_orange_900,
+                                      R.color.material_deep_purple_900, R.color.material_deep_purple_900, R.color.material_teal_900,
+                                      R.color.material_yellow_900, R.color.material_green_900, R.color.material_light_green_900,
+                                      R.color.material_light_blue_900, };
+
         mMuteIcon.setText(R.string.mute);
         mMuteIcon.setOnClickListener(view -> {
             mIsMuted = !mIsMuted;
             mMuteIcon.setText(mIsMuted ? R.string.un_mute : R.string.mute);
             mEventManager.setMuted(mIsMuted);
+        });
+
+        mFunMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                mEventManager.setMode(isChecked ? EventManager.Mode.FUN : EventManager.Mode.WORK);
+
+                // Add a random backgroun in fun mode
+                int bkgRes = R.color.md_black_1000;
+
+                if (isChecked) {
+                    bkgRes = mFunBackgrounds[(int) (mFunBackgrounds.length * Math.random())];
+                }
+
+                mLogo.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+                mFunLogo.setVisibility(!isChecked ? View.GONE : View.VISIBLE);
+
+                mMainContainer.setBackgroundColor(getResources().getColor(bkgRes));
+            }
         });
     }
 
@@ -199,8 +247,7 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
 
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                                                                  "MyApp::MyWakelockTag");
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag");
         wakeLock.acquire();
 
         try {
@@ -276,12 +323,11 @@ public class MainActivity extends BaseActivity implements SessionManager.Session
         manager.addView(view, localLayoutParams);
     }
 
-    @OnLongClick(R.id.ic_logo)
+    @OnLongClick (R.id.ic_logo)
     boolean onLogoClick() {
         Toast.makeText(this, String.format("Version %s (#%d)", BuildConfig.VERSION_NAME, BuildConfig.BUILD_NUMBER), Toast.LENGTH_SHORT).show();
         return true;
     }
-
 
 
     // ------------------------------------------------------------------------

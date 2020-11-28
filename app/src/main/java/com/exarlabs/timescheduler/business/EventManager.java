@@ -36,6 +36,10 @@ public class EventManager implements SessionManager.SessionEventListener {
     // TYPES
     // ------------------------------------------------------------------------
 
+    public enum Mode {
+        WORK, FUN
+    }
+
     // ------------------------------------------------------------------------
     // STATIC FIELDS
     // ------------------------------------------------------------------------
@@ -51,6 +55,8 @@ public class EventManager implements SessionManager.SessionEventListener {
     private Map<Marker, List<Integer>> mMarkerMap;
 
     private Event mUpcommingEvent;
+
+    private Mode mMode = Mode.WORK;
 
     @Inject
     SessionManager mSessionManager;
@@ -72,21 +78,67 @@ public class EventManager implements SessionManager.SessionEventListener {
         mExoPlayer = new SimpleExoPlayer.Builder(mContext).build();
         mExoPlayer.setPlayWhenReady(true);
 
+        initVoices();
+    }
+
+    private void initVoices() {
         mMarkerMap = new HashMap<>();
-        mMarkerMap.put(Marker.MARKER, Arrays.asList(R.raw.marker));
-        mMarkerMap.put(Marker.BREAK_3_2_1, Arrays.asList(R.raw.break_3_2_1));
-        mMarkerMap.put(Marker.TEN_MINUTES_REMINDER, Arrays.asList(R.raw.ten_minutes_left));
-        mMarkerMap.put(Marker.ONE_MINUTES_REMINDER, Arrays.asList(R.raw.one_more_minute));
-        mMarkerMap.put(Marker.GO_3_2_1, Arrays.asList(R.raw.go_3_2_1));
-        mMarkerMap.put(Marker.END, Arrays.asList(R.raw.end));
-        mMarkerMap.put(Marker.TEST_lONG, Arrays.asList(R.raw.lorem));
-        mMarkerMap.put(Marker.TEST,
-                       Arrays.asList(R.raw.voice_test, R.raw.voice_test1, R.raw.voice_test2, R.raw.voice_test3, R.raw.voice_test4, R.raw.voice_test5,
-                                     R.raw.voice_test6, R.raw.voice_test7, R.raw.voice_test8, R.raw.voice_test9, R.raw.voice_test10,
-                                     R.raw.voice_test11, R.raw.voice_test12, R.raw.voice_test13, R.raw.voice_test14, R.raw.voice_test15,
-                                     R.raw.voice_test16, R.raw.voice_test17, R.raw.voice_test18, R.raw.voice_test19, R.raw.voice_test20,
-                                     R.raw.voice_test21, R.raw.voice_test22, R.raw.voice_test23, R.raw.voice_test24, R.raw.voice_test25,
-                                     R.raw.voice_test26, R.raw.voice_test27));
+
+        switch (mMode) {
+
+            case WORK:
+                mMarkerMap.put(Marker.MARKER, Arrays.asList(R.raw.marker));
+                mMarkerMap.put(Marker.BREAK_3_2_1, Arrays.asList(R.raw.break_3_2_1));
+                mMarkerMap.put(Marker.TEN_MINUTES_REMINDER, Arrays.asList(R.raw.ten_minutes_left));
+                mMarkerMap.put(Marker.ONE_MINUTES_REMINDER, Arrays.asList(R.raw.one_more_minute));
+                mMarkerMap.put(Marker.GO_3_2_1, Arrays.asList(R.raw.go_3_2_1));
+                mMarkerMap.put(Marker.END, Arrays.asList(R.raw.end));
+                mMarkerMap.put(Marker.TEST_lONG, Arrays.asList(R.raw.lorem));
+                mMarkerMap.put(Marker.TEST,
+                               Arrays.asList(R.raw.voice_test, R.raw.voice_test1, R.raw.voice_test2, R.raw.voice_test3, R.raw.voice_test4,
+                                             R.raw.voice_test5, R.raw.voice_test6, R.raw.voice_test7, R.raw.voice_test8, R.raw.voice_test9,
+                                             R.raw.voice_test10, R.raw.voice_test11, R.raw.voice_test12, R.raw.voice_test13, R.raw.voice_test14,
+                                             R.raw.voice_test15, R.raw.voice_test16, R.raw.voice_test17, R.raw.voice_test18, R.raw.voice_test19,
+                                             R.raw.voice_test20, R.raw.voice_test21, R.raw.voice_test22, R.raw.voice_test23, R.raw.voice_test24,
+                                             R.raw.voice_test25, R.raw.voice_test26, R.raw.voice_test27));
+                break;
+
+            case FUN:
+                mMarkerMap.put(Marker.MARKER, Arrays.asList(R.raw.marker));
+                mMarkerMap.put(Marker.BREAK_3_2_1,
+                               Arrays.asList(R.raw.fun_break_1, R.raw.fun_break_2, R.raw.fun_break_3, R.raw.fun_break_4, R.raw.fun_break_5,
+                                             R.raw.fun_break_6, R.raw.fun_break_7, R.raw.fun_break_8, R.raw.fun_break_9, R.raw.fun_break_10,
+                                             R.raw.fun_break_11, R.raw.fun_break_12, R.raw.fun_break_13, R.raw.fun_break_14, R.raw.fun_break_15,
+                                             R.raw.fun_break_16, R.raw.fun_break_17
+
+                               ));
+                mMarkerMap.put(Marker.TEN_MINUTES_REMINDER,
+                               Arrays.asList(R.raw.fun_10_mins_1, R.raw.fun_10_mins_2, R.raw.fun_10_mins_3, R.raw.fun_10_mins_4, R.raw.fun_10_mins_5,
+                                             R.raw.fun_10_mins_6, R.raw.fun_10_mins_7, R.raw.fun_10_mins_8, R.raw.fun_10_mins_9, R.raw.fun_10_mins_10,
+                                             R.raw.fun_10_mins_11, R.raw.fun_10_mins_12, R.raw.fun_10_mins_13, R.raw.fun_10_mins_14,
+                                             R.raw.fun_10_mins_15
+
+
+                               ));
+                mMarkerMap.put(Marker.ONE_MINUTES_REMINDER, Arrays.asList(R.raw.fun_1_mins_1));
+
+                mMarkerMap.put(Marker.GO_3_2_1,
+                               Arrays.asList(R.raw.fun_work_1, R.raw.fun_work_2, R.raw.fun_work_3, R.raw.fun_work_4, R.raw.fun_work_5,
+                                             R.raw.fun_work_6, R.raw.fun_work_7, R.raw.fun_work_8, R.raw.fun_work_9, R.raw.fun_work_10,
+                                             R.raw.fun_work_11, R.raw.fun_work_12, R.raw.fun_work_13, R.raw.fun_work_14, R.raw.fun_work_15,
+                                             R.raw.fun_work_16
+
+
+                               ));
+                mMarkerMap.put(Marker.END, Arrays.asList(R.raw.end));
+                mMarkerMap.put(Marker.TEST_lONG, Arrays.asList(R.raw.lorem));
+                mMarkerMap.put(Marker.TEST, Arrays.asList(R.raw.fun_test_1, R.raw.fun_test_2, R.raw.fun_test_3, R.raw.fun_test_4, R.raw.fun_test_5,
+                                                          R.raw.fun_test_6, R.raw.fun_test_7, R.raw.fun_test_8, R.raw.fun_test_9, R.raw.fun_test_10,
+                                                          R.raw.fun_test_11, R.raw.fun_test_12, R.raw.fun_test_13, R.raw.fun_test_14,
+                                                          R.raw.fun_test_15));
+                break;
+        }
+
     }
 
     /**
@@ -166,7 +218,6 @@ public class EventManager implements SessionManager.SessionEventListener {
     }
 
 
-
     public void testLong() {
         playAudio(Marker.TEST);
     }
@@ -192,4 +243,12 @@ public class EventManager implements SessionManager.SessionEventListener {
         return mMuted;
     }
 
+    public Mode getMode() {
+        return mMode;
+    }
+
+    public void setMode(Mode mode) {
+        mMode = mode;
+        initVoices();
+    }
 }
